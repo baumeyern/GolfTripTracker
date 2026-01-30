@@ -98,6 +98,7 @@ export interface LeaderboardEntry {
   roundsPlayed: number;
   rank: number;
   isTied: boolean;
+  breakdown: PointsBreakdown;
 }
 
 export interface HoleWithPar extends Hole {

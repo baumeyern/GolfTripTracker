@@ -1,6 +1,7 @@
 import { useLeaderboard } from '@/hooks/useLeaderboard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { PointsBreakdown } from './PointsBreakdown';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { formatPoints, ordinalSuffix } from '@/lib/utils';
 
@@ -32,36 +33,39 @@ export function WeekStandings() {
         <CardTitle>Week-Long Standings</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-2">
+        <div className="space-y-4">
           {leaderboard.map((entry) => (
-            <div
-              key={entry.playerId}
-              className={`flex items-center justify-between p-4 rounded-lg ${
-                entry.rank <= 3 ? 'bg-primary/5' : 'bg-muted/50'
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 min-w-[60px]">
-                  {getRankIcon(entry.rank)}
-                  <span className="font-bold text-lg">
-                    {entry.isTied ? 'T-' : ''}{ordinalSuffix(entry.rank)}
-                  </span>
+            <div key={entry.playerId} className="space-y-2">
+              <div
+                className={`flex items-center justify-between p-4 rounded-lg ${
+                  entry.rank <= 3 ? 'bg-primary/5' : 'bg-muted/50'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 min-w-[60px]">
+                    {getRankIcon(entry.rank)}
+                    <span className="font-bold text-lg">
+                      {entry.isTied ? 'T-' : ''}{ordinalSuffix(entry.rank)}
+                    </span>
+                  </div>
+                  
+                  <div>
+                    <div className="font-semibold">{entry.playerName}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {entry.roundsPlayed} {entry.roundsPlayed === 1 ? 'round' : 'rounds'}
+                    </div>
+                  </div>
                 </div>
                 
-                <div>
-                  <div className="font-semibold">{entry.playerName}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {entry.roundsPlayed} {entry.roundsPlayed === 1 ? 'round' : 'rounds'}
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-primary">
+                    {formatPoints(entry.totalPoints)}
                   </div>
+                  <div className="text-sm text-muted-foreground">points</div>
                 </div>
               </div>
               
-              <div className="text-right">
-                <div className="text-2xl font-bold text-primary">
-                  {formatPoints(entry.totalPoints)}
-                </div>
-                <div className="text-sm text-muted-foreground">points</div>
-              </div>
+              <PointsBreakdown points={entry.breakdown} />
             </div>
           ))}
         </div>
