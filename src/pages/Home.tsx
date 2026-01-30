@@ -19,7 +19,7 @@ export function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link to="/new-round">
           <Card className="hover:bg-accent transition-colors cursor-pointer">
-            <CardContent className="pt-6">
+            <CardContent className="py-8 flex items-center justify-center">
               <div className="flex flex-col md:flex-row items-center gap-4">
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Play className="h-6 w-6 text-primary" />
@@ -38,7 +38,7 @@ export function Home() {
         {activeRounds.length > 0 && (
           <Link to={`/score-round/${activeRounds[0].id}`}>
             <Card className="hover:bg-accent transition-colors cursor-pointer border-primary">
-              <CardContent className="pt-6">
+              <CardContent className="py-8 flex items-center justify-center">
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Clock className="h-6 w-6 text-primary animate-pulse" />
