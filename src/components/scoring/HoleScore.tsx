@@ -30,7 +30,12 @@ export function HoleScore({
     setStrokes(initialStrokes || hole.par);
     setFairwayHit(initialFairwayHit);
     setGir(initialGir);
-  }, [hole, initialStrokes, initialFairwayHit, initialGir]);
+
+    // Auto-save par when first viewing a hole without a score
+    if (!initialStrokes) {
+      onUpdate(hole.par, false, false);
+    }
+  }, [hole, initialStrokes, initialFairwayHit, initialGir, onUpdate]);
 
   const handleStrokesChange = (newStrokes: number) => {
     if (newStrokes < 1) return;
