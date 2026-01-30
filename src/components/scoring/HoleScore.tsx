@@ -91,14 +91,15 @@ export function HoleScore({
         </div>
 
         {/* Quick score buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           {[hole.par - 1, hole.par, hole.par + 1, hole.par + 2].map((score) => (
             <Button
               key={score}
               type="button"
               variant={strokes === score ? 'default' : 'outline'}
-              size="sm"
+              size="lg"
               onClick={() => handleStrokesChange(score)}
+              className="min-w-[60px] text-lg font-bold"
             >
               {score}
             </Button>
