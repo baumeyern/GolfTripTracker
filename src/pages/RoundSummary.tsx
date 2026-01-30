@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { ArrowLeft, Calendar, MapPin } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Home, Trophy } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 export function RoundSummary() {
@@ -70,12 +70,18 @@ export function RoundSummary() {
 
       <RoundResults roundId={roundId!} />
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-3">
         <Link to="/" className="flex-1">
-          <Button variant="outline" className="w-full">Back to Home</Button>
+          <Button variant="outline" size="lg" className="w-full gap-2">
+            <Home className="h-5 w-5" />
+            Back to Home
+          </Button>
         </Link>
         <Link to="/leaderboard" className="flex-1">
-          <Button className="w-full">View Full Standings</Button>
+          <Button size="lg" className="w-full gap-2">
+            <Trophy className="h-5 w-5" />
+            View Full Standings
+          </Button>
         </Link>
       </div>
     </div>
