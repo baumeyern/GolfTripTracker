@@ -159,6 +159,27 @@ export function Scorecard({ roundId, player, holes, existingScores }: ScorecardP
               );
             })}
           </div>
+
+          {/* Stats Summary */}
+          {existingScores.length > 0 && (
+            <div className="mt-4 flex justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground">Fairways:</span>
+                <span className="font-semibold">
+                  {existingScores.filter(s => s.fairway_hit).length} / {existingScores.filter(s => {
+                    const hole = holes.find(h => h.id === s.hole_id);
+                    return hole && hole.par >= 4;
+                  }).length}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground">GIRs:</span>
+                <span className="font-semibold">
+                  {existingScores.filter(s => s.gir).length} / {existingScores.length}
+                </span>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
