@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HoleScore } from './HoleScore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,19 +17,30 @@ interface ScorecardProps {
 export function Scorecard({ roundId, player, holes, existingScores }: ScorecardProps) {
   const [currentHoleIndex, setCurrentHoleIndex] = useState(0);
   const upsertScore = useUpsertScore();
+  const hasInitialized = useRef(false);
+  const lastPlayerId = useRef(player.id);
 
   const currentHole = holes[currentHoleIndex];
   const currentScore = existingScores.find(s => s.hole_id === currentHole?.id);
 
   useEffect(() => {
-    // Auto-advance to first incomplete hole
-    const firstIncomplete = holes.findIndex(h => 
-      !existingScores.some(s => s.hole_id === h.id)
-    );
-    if (firstIncomplete !== -1) {
-      setCurrentHoleIndex(firstIncomplete);
+    // Reset initialization when player changes
+    if (lastPlayerId.current !== player.id) {
+      hasInitialized.current = false;
+      lastPlayerId.current = player.id;
     }
-  }, [holes, existingScores]);
+
+    // Auto-advance to first incomplete hole only on initial load or player change
+    if (!hasInitialized.current && holes.length > 0) {
+      const firstIncomplete = holes.findIndex(h => 
+        !existingScores.some(s => s.hole_id === h.id)
+      );
+      if (firstIncomplete !== -1) {
+        setCurrentHoleIndex(firstIncomplete);
+      }
+      hasInitialized.current = true;
+    }
+  }, [player.id, holes, existingScores]);
 
   const handleScoreUpdate = async (
     strokes: number,
