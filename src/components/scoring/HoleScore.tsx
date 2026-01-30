@@ -25,17 +25,28 @@ export function HoleScore({
   const [strokes, setStrokes] = useState(initialStrokes || hole.par);
   const [fairwayHit, setFairwayHit] = useState(initialFairwayHit);
   const [gir, setGir] = useState(initialGir);
-  const autoSavedHoles = useRef<Set<string>>(new Set());
+  const lastAutoSave = useRef<{ holeId: string; hadScore: boolean } | null>(null);
 
   useEffect(() => {
+    const hadScore = initialStrokes !== undefined;
+    
     setStrokes(initialStrokes || hole.par);
     setFairwayHit(initialFairwayHit);
     setGir(initialGir);
 
     // Auto-save par when first viewing a hole without a score
-    if (!initialStrokes && !autoSavedHoles.current.has(hole.id)) {
-      autoSavedHoles.current.add(hole.id);
+    // Only auto-save if this is a new hole or if the score state changed from scored to unscored
+    const shouldAutoSave = !hadScore && 
+      (!lastAutoSave.current || 
+       lastAutoSave.current.holeId !== hole.id || 
+       lastAutoSave.current.hadScore !== hadScore);
+    
+    if (shouldAutoSave) {
+      lastAutoSave.current = { holeId: hole.id, hadScore };
       onUpdate(hole.par, false, false);
+    } else if (hadScore) {
+      // Update the ref when a score exists so we know the state
+      lastAutoSave.current = { holeId: hole.id, hadScore };
     }
   }, [hole.id, hole.par, initialStrokes, initialFairwayHit, initialGir]);
 
