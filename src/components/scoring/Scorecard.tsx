@@ -124,7 +124,7 @@ export function Scorecard({ roundId, player, holes, existingScores }: ScorecardP
           />
 
           {/* Progress indicator */}
-          <div className="mt-6 grid grid-cols-9 gap-1 sm:gap-2">
+          <div className="mt-6 grid grid-cols-6 sm:grid-cols-9 gap-1.5 sm:gap-2">
             {holes.map((hole, index) => {
               const score = existingScores.find(s => s.hole_id === hole.id);
               const hasScore = !!score;
@@ -132,9 +132,9 @@ export function Scorecard({ roundId, player, holes, existingScores }: ScorecardP
                 <button
                   key={hole.id}
                   onClick={() => setCurrentHoleIndex(index)}
-                  className={`flex flex-col items-center justify-center p-1 sm:p-2 rounded-md sm:rounded-lg transition-all min-h-[44px] ${
+                  className={`flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-md sm:rounded-lg transition-all min-h-[48px] ${
                     index === currentHoleIndex
-                      ? 'bg-primary text-primary-foreground ring-2 ring-primary ring-offset-1'
+                      ? 'bg-primary text-primary-foreground ring-2 ring-primary'
                       : hasScore
                       ? 'bg-primary/20 hover:bg-primary/30'
                       : 'bg-muted hover:bg-muted/80'
