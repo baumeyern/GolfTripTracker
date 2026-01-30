@@ -62,12 +62,11 @@ export function HoleScore({
           <Button
             type="button"
             variant="outline"
-            size="xl"
             onClick={() => handleStrokesChange(strokes - 1)}
             disabled={strokes <= 1}
-            className="h-16 w-16 rounded-full"
+            className="h-16 w-16 rounded-full p-0 flex items-center justify-center"
           >
-            <Minus className="h-6 w-6" />
+            <Minus className="h-8 w-8" />
           </Button>
           
           <div className="text-center min-w-[120px]">
@@ -82,24 +81,22 @@ export function HoleScore({
           <Button
             type="button"
             variant="outline"
-            size="xl"
             onClick={() => handleStrokesChange(strokes + 1)}
-            className="h-16 w-16 rounded-full"
+            className="h-16 w-16 rounded-full p-0 flex items-center justify-center"
           >
-            <Plus className="h-6 w-6" />
+            <Plus className="h-8 w-8" />
           </Button>
         </div>
 
         {/* Quick score buttons */}
-        <div className="flex gap-2 justify-center">
+        <div className="flex gap-2 justify-center flex-wrap">
           {[hole.par - 1, hole.par, hole.par + 1, hole.par + 2].map((score) => (
             <Button
               key={score}
               type="button"
               variant={strokes === score ? 'default' : 'outline'}
-              size="lg"
               onClick={() => handleStrokesChange(score)}
-              className="min-w-[60px] text-lg font-bold"
+              className="h-12 min-w-[64px] text-xl font-bold px-4"
             >
               {score}
             </Button>
