@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -25,6 +25,7 @@ export function HoleScore({
   const [strokes, setStrokes] = useState(initialStrokes || hole.par);
   const [fairwayHit, setFairwayHit] = useState(initialFairwayHit);
   const [gir, setGir] = useState(initialGir);
+  const autoSavedHoles = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     setStrokes(initialStrokes || hole.par);
@@ -32,10 +33,11 @@ export function HoleScore({
     setGir(initialGir);
 
     // Auto-save par when first viewing a hole without a score
-    if (!initialStrokes) {
+    if (!initialStrokes && !autoSavedHoles.current.has(hole.id)) {
+      autoSavedHoles.current.add(hole.id);
       onUpdate(hole.par, false, false);
     }
-  }, [hole, initialStrokes, initialFairwayHit, initialGir, onUpdate]);
+  }, [hole.id, hole.par, initialStrokes, initialFairwayHit, initialGir]);
 
   const handleStrokesChange = (newStrokes: number) => {
     if (newStrokes < 1) return;
