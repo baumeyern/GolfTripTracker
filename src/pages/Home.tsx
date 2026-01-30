@@ -20,7 +20,7 @@ export function Home() {
         <Link to="/new-round">
           <Card className="hover:bg-accent transition-colors cursor-pointer">
             <CardContent className="pt-6">
-              <div className="flex items-center justify-center md:justify-start gap-4">
+              <div className="flex flex-col md:flex-row items-center gap-4">
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Play className="h-6 w-6 text-primary" />
                 </div>
@@ -39,7 +39,7 @@ export function Home() {
           <Link to={`/score-round/${activeRounds[0].id}`}>
             <Card className="hover:bg-accent transition-colors cursor-pointer border-primary">
               <CardContent className="pt-6">
-                <div className="flex items-center justify-center md:justify-start gap-4">
+                <div className="flex flex-col md:flex-row items-center gap-4">
                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Clock className="h-6 w-6 text-primary animate-pulse" />
                   </div>
