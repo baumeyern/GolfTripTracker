@@ -1,6 +1,5 @@
 import { useLeaderboard } from '@/hooks/useLeaderboard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { formatPoints, ordinalSuffix } from '@/lib/utils';

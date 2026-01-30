@@ -7,8 +7,6 @@ import {
   RoundScores,
   RoundAchievementData,
   Score,
-  Hole,
-  Player,
 } from '@/types';
 
 export function useLeaderboard() {
@@ -149,7 +147,7 @@ export function useRoundResults(roundId: string) {
       // Create results
       const results: PlayerRoundResult[] = roundScores.map(rs => {
         const points = pointsMap.get(rs.playerId)!;
-        const totalPar = holes.reduce((sum, h) => sum + h.par, 0);
+        const totalPar = holes.reduce((sum: number, h) => sum + h.par, 0);
         return {
           playerId: rs.playerId,
           playerName: rs.playerName,

@@ -12,7 +12,6 @@ export function Home() {
   const { data: rounds, isLoading } = useRounds();
 
   const activeRounds = rounds?.filter(r => !r.is_complete) || [];
-  const completedRounds = rounds?.filter(r => r.is_complete) || [];
 
   return (
     <div className="space-y-8 pb-20 md:pb-8">

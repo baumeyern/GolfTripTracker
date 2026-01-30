@@ -110,11 +110,10 @@ export function HoleScore({
       <div className="space-y-4 pt-4 border-t">
         {showFairway && (
           <div className="flex items-center justify-between">
-            <Label htmlFor="fairway" className="text-base">
+            <Label className="text-base">
               Fairway Hit
             </Label>
             <Switch
-              id="fairway"
               checked={fairwayHit}
               onCheckedChange={handleFairwayChange}
             />
@@ -122,11 +121,10 @@ export function HoleScore({
         )}
         
         <div className="flex items-center justify-between">
-          <Label htmlFor="gir" className="text-base">
+          <Label className="text-base">
             Green in Regulation
           </Label>
           <Switch
-            id="gir"
             checked={gir}
             onCheckedChange={handleGirChange}
           />
