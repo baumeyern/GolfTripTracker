@@ -104,9 +104,9 @@ export function Home() {
           ) : (
             <div className="text-center py-8 text-muted-foreground">
               <p>No rounds yet. Start your first round to begin!</p>
-              <Button asChild className="mt-4">
-                <Link to="/new-round">Start New Round</Link>
-              </Button>
+              <Link to="/new-round">
+                <Button className="mt-4">Start New Round</Button>
+              </Link>
             </div>
           )}
         </CardContent>

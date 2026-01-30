@@ -29,11 +29,11 @@ export function RoundSummary() {
   return (
     <div className="space-y-6 pb-20 md:pb-8">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
-          <Link to="/">
+        <Link to="/">
+          <Button variant="ghost" size="icon">
             <ArrowLeft className="h-5 w-5" />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <div className="flex-1">
           <h1 className="text-3xl font-bold">Round Summary</h1>
         </div>
@@ -71,12 +71,12 @@ export function RoundSummary() {
       <RoundResults roundId={roundId!} />
 
       <div className="flex gap-4">
-        <Button variant="outline" asChild className="flex-1">
-          <Link to="/">Back to Home</Link>
-        </Button>
-        <Button asChild className="flex-1">
-          <Link to="/leaderboard">View Full Standings</Link>
-        </Button>
+        <Link to="/" className="flex-1">
+          <Button variant="outline" className="w-full">Back to Home</Button>
+        </Link>
+        <Link to="/leaderboard" className="flex-1">
+          <Button className="w-full">View Full Standings</Button>
+        </Link>
       </div>
     </div>
   );
